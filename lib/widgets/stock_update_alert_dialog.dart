@@ -6,6 +6,7 @@ import 'package:btcpl/widgets/tms_normaltext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:image_picker/image_picker.dart';
 import '../model/stock_update/stock_update_list/stock_update_list_response.dart';
 import '../moduls/stock_update_page/stock_update_controller.dart';
@@ -341,18 +342,19 @@ class _StockUpdateDailogState extends State<StockUpdateDailog> {
                                             const Spacer(),
                                             InkWell(
                                               onTap: damageImageFromCamera,
-                                              child: const Image(
-                                                image: AssetImage(
-                                                  'assets/images/dashboardimages/camera.png',
-                                                ),
+                                              child: const HugeIcon(
+                                                icon: HugeIcons.strokeRoundedCamera01,
+                                                color: Color(0xff232F34),
+                                                size: 30,
                                               ),
                                             ),
                                             const Spacer(),
                                             InkWell(
                                               onTap: damageImagesFromGallery,
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    'assets/images/dashboardimages/Remove Image.png'),
+                                              child: const HugeIcon(
+                                                icon: HugeIcons.strokeRoundedImageAdd01,
+                                                color: Color(0xff232F34),
+                                                size: 30,
                                               ),
                                             ),
                                             const Spacer(),
@@ -442,18 +444,19 @@ class _StockUpdateDailogState extends State<StockUpdateDailog> {
                                             const Spacer(),
                                             InkWell(
                                               onTap: pillfillImageFromCamera,
-                                              child: const Image(
-                                                image: AssetImage(
-                                                  'assets/images/dashboardimages/camera.png',
-                                                ),
+                                              child: const HugeIcon(
+                                                icon: HugeIcons.strokeRoundedCamera01,
+                                                color: Color(0xff232F34),
+                                                size: 30,
                                               ),
                                             ),
                                             const Spacer(),
                                             InkWell(
                                               onTap: pillfillImagesFromGallery,
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    'assets/images/dashboardimages/Remove Image.png'),
+                                              child: const HugeIcon(
+                                                icon: HugeIcons.strokeRoundedImageAdd01,
+                                                color: Color(0xff232F34),
+                                                size: 30,
                                               ),
                                             ),
                                             const Spacer(),

@@ -1,6 +1,7 @@
 import 'package:btcpl/moduls/stock_update_page/stock_update_scanned_docket_number.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import '../../app_routes.dart';
 import '../../model/stock_update/stock_update_list/stock_update_list_request.dart';
@@ -314,7 +315,7 @@ class StockUpdateController extends GetxController {
                 Get.toNamed(AppRoutes.dashboardScreen);
               },
               onTapText: 'Done',
-              image: 'assets/images/dashboardimages/succes.png',
+              icon: HugeIcons.strokeRoundedCheckmarkCircle01,
             );
           } else {
             Get.back();

@@ -5,6 +5,7 @@ import 'package:btcpl/moduls/stock_update_page/stock_update_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../model/stock_update/stock_update_list/stock_update_list_response.dart';
 import '../../widgets/app_size.dart';
@@ -359,10 +360,10 @@ class _StockUpdateScannedDocketNumberScreenState
                                               children: [
                                                 InkWell(
                                                   onTap: damageImageFromCamera,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                      'assets/images/dashboardimages/uploadCamera.png',
-                                                    ),
+                                                  child: const HugeIcon(
+                                                    icon: HugeIcons.strokeRoundedCamera01,
+                                                    color: Color(0xff232F34),
+                                                    size: 30,
                                                   ),
                                                 ),
                                                 Padding(
@@ -372,10 +373,10 @@ class _StockUpdateScannedDocketNumberScreenState
                                                   child: InkWell(
                                                     onTap:
                                                         damageImagesFromGallery,
-                                                    child: const Image(
-                                                      image: AssetImage(
-                                                          'assets/images/dashboardimages/uploadGallery.png'),
-                                                      height: 30,
+                                                    child: const HugeIcon(
+                                                      icon: HugeIcons.strokeRoundedImageAdd01,
+                                                      color: Color(0xff232F34),
+                                                      size: 30,
                                                     ),
                                                   ),
                                                 ),
@@ -428,10 +429,10 @@ class _StockUpdateScannedDocketNumberScreenState
                                                 InkWell(
                                                   onTap:
                                                       pillFillImageFromCamera,
-                                                  child: const Image(
-                                                    image: AssetImage(
-                                                      'assets/images/dashboardimages/uploadCamera.png',
-                                                    ),
+                                                  child: const HugeIcon(
+                                                    icon: HugeIcons.strokeRoundedCamera01,
+                                                    color: Color(0xff232F34),
+                                                    size: 30,
                                                   ),
                                                 ),
                                                 Padding(
@@ -441,10 +442,10 @@ class _StockUpdateScannedDocketNumberScreenState
                                                   child: InkWell(
                                                     onTap:
                                                         pillFillImagesFromGallery,
-                                                    child: const Image(
-                                                      image: AssetImage(
-                                                          'assets/images/dashboardimages/uploadGallery.png'),
-                                                      height: 30,
+                                                    child: const HugeIcon(
+                                                      icon: HugeIcons.strokeRoundedImageAdd01,
+                                                      color: Color(0xff232F34),
+                                                      size: 30,
                                                     ),
                                                   ),
                                                 ),

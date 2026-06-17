@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../app_routes.dart';
 import '../../../utils/tms_color.dart';
@@ -133,7 +134,7 @@ class StockUpdateListScreen extends StatelessWidget {
               text: richText,
               color: Colors.black.withOpacity(0.7),
               height: 25,
-              image: "assets/images/dashboardimages/In Transit.png",
+              icon: HugeIcons.strokeRoundedDeliveryTruck01,
             ),
             const SizedBox(
               height: 03,
@@ -142,7 +143,7 @@ class StockUpdateListScreen extends StatelessWidget {
               text: richText2,
               color: Colors.black.withOpacity(0.7),
               height: 25,
-              image: "assets/images/dashboardimages/Calendar.png",
+              icon: HugeIcons.strokeRoundedCalendar03,
             ),
           ],
         ),

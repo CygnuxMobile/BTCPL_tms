@@ -28,6 +28,7 @@ abstract class AppEnvironments {
       'attendance',
       'tracking',
       'drs',
+      'drsGenerate',
       'prq'
     ];
   }

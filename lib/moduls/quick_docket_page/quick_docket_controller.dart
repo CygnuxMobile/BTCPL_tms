@@ -3,6 +3,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../app_routes.dart';
 import '../../model/dash_board_model/location_master.dart';
@@ -420,7 +421,7 @@ class QuickDocketController extends GetxController {
               Get.toNamed(AppRoutes.docketDetails, arguments: docketNm);
             },
             onTapText: 'Done',
-            image: 'assets/images/dashboardimages/succes.png',
+            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
           );
         } else {
           log.e(jsonDecode(response.data),

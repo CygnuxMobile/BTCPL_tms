@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../app_routes.dart';
 import '../../utils/tms_color.dart';
 import '../../widgets/tms_normaltext.dart';
@@ -117,20 +118,20 @@ class DocketScreen extends StatelessWidget {
                 ),
                 TmsDocketListView(
                     text: '${ctrl.docketData[index].pkgsno}',
-                    image: 'assets/images/dashboardimages/Product.png',
+                    icon: HugeIcons.strokeRoundedPackage,
                     height: 30),
               ],
             ),
             TmsDocketListView(
                 text: ctrl.docketData[index].dockdt,
-                image: 'assets/images/dashboardimages/Calendar.png',
+                icon: HugeIcons.strokeRoundedCalendar03,
                 height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TmsDocketListView(
                     text: '${ctrl.docketData[index].actuwt}',
-                    image: 'assets/images/dashboardimages/Scale.png',
+                    icon: HugeIcons.strokeRoundedListView,
                     height: 28),
                 InkWell(
                   onTap: () async {
@@ -175,9 +176,10 @@ class DocketScreen extends StatelessWidget {
                       style: TextStyle(
                           color: Color(0xffC4CACD), fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    Image(
-                      image: AssetImage('assets/images/dashboardimages/arrowBlack.png'),
-                      height: 20,
+                    const HugeIcon(
+                      icon: HugeIcons.strokeRoundedArrowRight01,
+                      color: Color(0xffC4CACD),
+                      size: 20,
                     ),
                     Text(
                       "${ctrl.docketData[index].csgenm.length <= 10 ? ctrl.docketData[index].csgenm : ctrl.docketData[index].csgenm.substring(0, 10) + "..."}",
@@ -199,12 +201,13 @@ class DocketScreen extends StatelessWidget {
     return isOn;
   }
 
-  TmsDocketListView({required String text, required String image, required double height}) {
+  TmsDocketListView({required String text, required List<List<dynamic>> icon, required double height}) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: const Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

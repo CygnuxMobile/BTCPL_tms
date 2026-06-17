@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../utils/tms_color.dart';
 import '../../../widgets/app_size.dart';
@@ -92,7 +93,7 @@ class DrsUpdateScreen extends StatelessWidget {
                             sizeBox(),
                             TmsImageTextView(
                               text: drsController.drsDetailList[index].dockno,
-                              image: "assets/images/dashboardimages/Docket.png",
+                              icon: HugeIcons.strokeRoundedFile01,
                               height: 25,
                               color: Color(0xff4CAF50),
                               fontWeight: FontWeight.w500,
@@ -111,7 +112,7 @@ class DrsUpdateScreen extends StatelessWidget {
                               children: [
                                 TmsImageTextView(
                                   text: "${drsController.drsDetailList[index].pkgsArrived}",
-                                  image: "assets/images/dashboardimages/image 16 (1).png",
+                                  icon: HugeIcons.strokeRoundedCalendar03,
                                   height: 25,
                                   color: Color(0xff646D72),
                                   fontWeight: FontWeight.w500,
@@ -119,7 +120,7 @@ class DrsUpdateScreen extends StatelessWidget {
                                 Spacer(),
                                 TmsImageTextView(
                                   text: "${drsController.drsDetailList[index].pkgsPending}",
-                                  image: "assets/images/dashboardimages/image 15.png",
+                                  icon: HugeIcons.strokeRoundedClock01,
                                   height: 25,
                                   color: Color(0xff646D72),
                                   fontWeight: FontWeight.w500,
@@ -142,9 +143,10 @@ class DrsUpdateScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 12),
                       child: Row(
                         children: [
-                          Image(
-                            image: AssetImage('assets/images/dashboardimages/delivered.png'),
-                            height: 25,
+                          const HugeIcon(
+                            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+                            color: Color(0xff232F34),
+                            size: 25,
                           ),
                           Expanded(
                             child: Padding(
@@ -188,9 +190,10 @@ class DrsUpdateScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 12),
                       child: Row(
                         children: [
-                          Image(
-                            image: AssetImage('assets/images/dashboardimages/remark.png'),
-                            height: 25,
+                          const HugeIcon(
+                            icon: HugeIcons.strokeRoundedComment01,
+                            color: Color(0xff232F34),
+                            size: 25,
                           ),
                           Expanded(
                             child: Padding(

@@ -4,6 +4,7 @@ import 'package:btcpl/moduls/trecking_page/tracking_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:photo_view/photo_view.dart';
 import '../../utils/tms_color.dart';
 import '../../widgets/app_size.dart';
@@ -123,7 +124,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               Spacer(),
                               TmsTrackingListView(
                                   text: trackingController.noOfPkgs ?? '',
-                                  image: 'assets/images/dashboardimages/Product.png',
+                                  icon: HugeIcons.strokeRoundedPackage,
                                   height: 25),
                             },
                           ],
@@ -131,16 +132,16 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         if (trackingController.docketDate!.isNotEmpty) ...{
                           TmsTrackingListView(
                               text: trackingController.docketDate ?? '',
-                              image: 'assets/images/dashboardimages/Calendar.png',
+                              icon: HugeIcons.strokeRoundedCalendar03,
                               height: 25),
                         },
                         if (trackingController.billingParty!.isNotEmpty) ...{
                           Row(
                             children: [
-                              Image(
-                                image:
-                                    AssetImage("assets/images/dashboardimages/Billing party.png"),
-                                height: 25,
+                              const HugeIcon(
+                                icon: HugeIcons.strokeRoundedUserGroup,
+                                color: Color(0xff232F34),
+                                size: 25,
                               ),
                               Container(
                                 width: AppSize.size(context).width / 1.5,
@@ -165,9 +166,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         if (trackingController.consignee!.isNotEmpty) ...{
                           Row(
                             children: [
-                              Image(
-                                image: AssetImage("assets/images/dashboardimages/Consignee.png"),
-                                height: 25,
+                              const HugeIcon(
+                                icon: HugeIcons.strokeRoundedUser,
+                                color: Color(0xff232F34),
+                                size: 25,
                               ),
                               Container(
                                 width: AppSize.size(context).width / 1.5,
@@ -189,9 +191,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         if (trackingController.status != null) ...{
                           Row(
                             children: [
-                              Image(
-                                image: AssetImage("assets/images/dashboardimages/states.png"),
-                                height: 25,
+                              const HugeIcon(
+                                icon: HugeIcons.strokeRoundedGlobal,
+                                color: Color(0xff232F34),
+                                size: 25,
                               ),
                               Container(
                                 width: AppSize.size(context).width / 1.5,
@@ -316,9 +319,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               ],
                             ),
                           ),
-                          Image(
-                            image: AssetImage('assets/images/dashboardimages/arrow.png'),
-                            height: 20,
+                          const HugeIcon(
+                            icon: HugeIcons.strokeRoundedArrowRight01,
+                            color: Colors.white,
+                            size: 20,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -529,7 +533,7 @@ class FullScreenImage extends StatelessWidget {
 
 class TmsTrackingListView extends StatelessWidget {
   final String text;
-  final String image;
+  final List<List<dynamic>> icon;
   final double height;
   final Color? color;
   final FontWeight? fontWeight;
@@ -537,7 +541,7 @@ class TmsTrackingListView extends StatelessWidget {
   const TmsTrackingListView({
     Key? key,
     required this.text,
-    required this.image,
+    required this.icon,
     required this.height,
     this.color,
     this.fontWeight,
@@ -547,9 +551,10 @@ class TmsTrackingListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: const Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

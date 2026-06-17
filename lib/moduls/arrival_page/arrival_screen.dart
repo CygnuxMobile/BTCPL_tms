@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../widgets/app_size.dart';
 import '../../widgets/arrival_widgets/custom_bottamsheet.dart';
 import '../../widgets/dashboard_widgets/custom_drawer.dart';
@@ -85,14 +86,14 @@ class ArrivalScreen extends GetView {
                             ),
                             TmsArrivalView(
                                 text: ctrl.thcArrivalsData[index].thcDate,
-                                image: 'assets/images/dashboardimages/Calendar.png',
+                                icon: HugeIcons.strokeRoundedCalendar03,
                                 height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TmsArrivalView(
                                     text: ctrl.thcArrivalsData[index].vehicle,
-                                    image: 'assets/images/dashboardimages/In Transit.png',
+                                    icon: HugeIcons.strokeRoundedDeliveryTruck01,
                                     height: 28),
                                 InkWell(
                                   onTap: () {
@@ -133,12 +134,13 @@ class ArrivalScreen extends GetView {
     );
   }
 
-  TmsArrivalView({required String text, required String image, required double height}) {
+  TmsArrivalView({required String text, required List<List<dynamic>> icon, required double height}) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: const Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

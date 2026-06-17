@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../model/docket_model/docket.dart';
 import '../../widgets/app_size.dart';
 import '../../widgets/tms_normaltext.dart';
@@ -89,10 +90,10 @@ class DocketPackageScreen extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                                      child: const Image(
-                                        image: AssetImage(
-                                            'assets/images/dashboardimages/qr-code 1.png'),
-                                        height: 80,
+                                      child: const HugeIcon(
+                                        icon: HugeIcons.strokeRoundedQrCode,
+                                        color: Color(0xff232F34),
+                                        size: 80,
                                       ),
                                     ),
                                     Align(
@@ -103,12 +104,12 @@ class DocketPackageScreen extends StatelessWidget {
                                           TmsDocketListView(
                                               color: Color(0xff646D72),
                                               text: argumentData.dockdt,
-                                              image: 'assets/images/dashboardimages/Calendar.png',
+                                              icon: HugeIcons.strokeRoundedCalendar03,
                                               height: 20),
                                           TmsDocketListView(
                                               color: Colors.blue.withOpacity(0.7),
                                               text: '${index + 1} / ${argumentData.pkgsno.toInt()}',
-                                              image: 'assets/images/dashboardimages/Product.png',
+                                              icon: HugeIcons.strokeRoundedPackage,
                                               height: 20),
                                         ],
                                       ),
@@ -189,10 +190,10 @@ class DocketPackageScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Image(
-                                        image:
-                                            AssetImage('assets/images/dashboardimages/arrow.png'),
-                                        height: 20,
+                                      const HugeIcon(
+                                        icon: HugeIcons.strokeRoundedArrowRight01,
+                                        color: Colors.white,
+                                        size: 20,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -244,12 +245,13 @@ class DocketPackageScreen extends StatelessWidget {
   }
 
   TmsDocketListView(
-      {required String text, required String image, required double height, required Color color}) {
+      {required String text, required List<List<dynamic>> icon, required double height, required Color color}) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: const Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

@@ -1,5 +1,6 @@
 import 'package:btcpl/widgets/tms_normaltext.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class TmsRichText extends StatelessWidget {
   const TmsRichText(
@@ -52,14 +53,14 @@ class TmsImageTextView extends StatelessWidget {
    TmsImageTextView(
       {super.key,
       required this.text,
-      required this.image,
+      required this.icon,
       required this.height,
       required this.color,
       this.fontWeight,
       });
 
   final String text;
-  final String image;
+  final List<List<dynamic>> icon;
   final double height;
   final Color color;
   FontWeight? fontWeight;
@@ -68,9 +69,10 @@ class TmsImageTextView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: const Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

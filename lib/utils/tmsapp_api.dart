@@ -29,4 +29,14 @@ class ApiService {
   static String checkValidDocketNo = '${baseUrl}V1/Operation/CheckValidDocketNo';
   static String quickDocketAPI = '${baseUrl}V1/Operation/QuickDocketAPI';
   static String cityAPI = '${baseUrl}V1/Operation/GetAllCityList';
+  static String getVendorType = '${baseUrl}V1/Operation/GetVendorType';
+  static String getVendorsFromVendorType = '${baseUrl}V1/Operation/GetVendorsFromVendorType';
+  static String getVehicleFromVendor = '${baseUrl}V1/Operation/GetVehicleFromVendor';
+  static String getVehicleDetails = '${baseUrl}V1/Operation/GetVehicleDetails';
+  static String getDriverList = '${baseUrl}V1/Operation/GetDriverList';
+  static String getDriverDetails = '${baseUrl}V1/Operation/GetDriverDetails';
+  static String getDeliveryAgent = '${baseUrl}V1/Operation/GetDeliveryAgent';
+  static String getCrossingAgent = '${baseUrl}V1/Operation/GetCrossingAgent';
+  static String avalabledocketinPRSDRS = '${baseUrl}V1/Operation/AvalabledocketinPRSDRS';
+  static String prepareDRS = '${baseUrl}V1/Operation/PrepareDRS';
 }

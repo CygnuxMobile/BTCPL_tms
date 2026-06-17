@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../app_routes.dart';
 import '../../utils/pref.dart';
@@ -196,7 +197,7 @@ class _DRSListScreenState extends State<DRSListScreen> {
             Row(children: [
               TmsImageTextView(
                 text: drsController.showDate(drsDate),
-                image: 'assets/images/dashboardimages/Calendar.png',
+                icon: HugeIcons.strokeRoundedCalendar03,
                 height: 25,
                 color: Color(0xff232F34),
               ),

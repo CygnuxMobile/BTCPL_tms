@@ -2,6 +2,7 @@ import 'package:btcpl/moduls/quick_docket_page/quick_docket_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:info_widget/info_widget.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../utils/pref.dart';
@@ -228,7 +229,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       return Obx(
         () => Dropdown(
           height: 25.0.obs,
-          image: "assets/images/dashboardimages/To.png".obs,
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedLocation01,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           enabled: true.obs,
           isSize: false,
           text: Pref().getBaseLocation().isEmpty
@@ -250,7 +255,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
     } else {
       return Dropdown(
         height: 25.0.obs,
-        image: "assets/images/dashboardimages/To.png".obs,
+        icon: const HugeIcon(
+          icon: HugeIcons.strokeRoundedLocation01,
+          color: Color(0xff232F34),
+          size: 25,
+        ),
         enabled: false.obs,
         isSize: false,
         boxDecoration: BoxDecoration(
@@ -272,7 +281,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       () => Form(
         key: destinationFromKey,
         child: Dropdown(
-          image: "assets/images/dashboardimages/Form.png".obs,
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedNote01,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           enabled: true.obs,
           height: 25.0.obs,
           isSize: false,
@@ -303,7 +316,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
   billingTypeDropdown(context) {
     return Obx(
       () => Dropdown(
-        image: 'assets/images/dashboardimages/Billing Machine.png'.obs,
+        icon: const HugeIcon(
+          icon: HugeIcons.strokeRoundedCalculator,
+          color: Color(0xff232F34),
+          size: 30,
+        ),
         height: 30.0.obs,
         enabled: true.obs,
         isSize: false,
@@ -338,7 +355,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
           }
         },
         child: Dropdown(
-          image: 'assets/images/dashboardimages/Get a Receipt.png'.obs,
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedInvoice,
+            color: Color(0xff232F34),
+            size: 28,
+          ),
           height: 28.0.obs,
           enabled: (quickDocketController.customerList.isNotEmpty ? true : false).obs,
           isSize: false,
@@ -371,7 +392,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
         width: double.infinity,
         child: Row(
           children: [
-            Image(image: AssetImage('assets/images/dashboardimages/Product.png'), height: 20),
+            const HugeIcon(
+              icon: HugeIcons.strokeRoundedPackage,
+              color: Color(0xff232F34),
+              size: 20,
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
@@ -423,7 +448,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       width: double.infinity,
       child: Row(
         children: [
-          Image(image: AssetImage('assets/images/dashboardimages/Cheque.png'), height: 25),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedLicense,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
@@ -461,7 +490,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       width: double.infinity,
       child: Row(
         children: [
-          Image(image: AssetImage('assets/images/dashboardimages/Cheque.png'), height: 25),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedLicense,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
@@ -490,7 +523,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       width: double.infinity,
       child: Row(
         children: [
-          Image(image: AssetImage('assets/images/dashboardimages/Box.png'), height: 25),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedPackage,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
@@ -519,7 +556,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       width: double.infinity,
       child: Row(
         children: [
-          Image(image: AssetImage('assets/images/dashboardimages/E Way Bill no.png'), height: 25),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedFile01,
+            color: Color(0xff232F34),
+            size: 25,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
@@ -550,7 +591,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
         width: double.infinity,
         child: Row(
           children: [
-            Image(image: AssetImage('assets/images/dashboardimages/Scale.png'), height: 20),
+            const HugeIcon(
+              icon: HugeIcons.strokeRoundedListView,
+              color: Color(0xff232F34),
+              size: 20,
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
@@ -589,9 +634,10 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
   InfoText() {
     return Row(
       children: [
-        Image(
-          image: AssetImage('assets/images/dashboardimages/Info.png'),
-          height: 20,
+        const HugeIcon(
+          icon: HugeIcons.strokeRoundedInformationCircle,
+          color: Color(0xff232F34),
+          size: 20,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10),
@@ -612,9 +658,10 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          Image(
-            image: AssetImage('assets/images/dashboardimages/Info.png'),
-            height: 20,
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedInformationCircle,
+            color: Color(0xff232F34),
+            size: 20,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10),
@@ -633,7 +680,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
   consignorDropdown(context) {
     return Obx(
       () => Dropdown(
-        image: 'assets/images/dashboardimages/Product.png'.obs,
+        icon: const HugeIcon(
+          icon: HugeIcons.strokeRoundedPackage,
+          color: Color(0xff232F34),
+          size: 28,
+        ),
         height: 28.0.obs,
         enabled: (quickDocketController.consignorConsigneeList.isNotEmpty ? true : false).obs,
         isSize: false,
@@ -656,7 +707,11 @@ class _QuickDocketScreenState extends State<QuickDocketScreen> {
   consigneeDropdown(context) {
     return Obx(
       () => Dropdown(
-        image: 'assets/images/dashboardimages/Product.png'.obs,
+        icon: const HugeIcon(
+          icon: HugeIcons.strokeRoundedPackage,
+          color: Color(0xff232F34),
+          size: 28,
+        ),
         height: 28.0.obs,
         enabled: (quickDocketController.consignorConsigneeList.isNotEmpty ? true : false).obs,
         isSize: false,

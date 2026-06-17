@@ -18,6 +18,7 @@ class AppRoutes {
   static const String drsListScreen = '/drsListScreen';
   static const String docketListScreen = '/docketListScreen';
   static const String drsUpdateScreen = '/drsUpdateScreen';
+  static const String drsGenerateScreen = '/drsGenerateScreen';
   static const String quickDocketScreen = '/quickDocketScreen';
   static const String prqScreen = '/prqScreen';
   static const String webViewScreen = '/webViewScreen';

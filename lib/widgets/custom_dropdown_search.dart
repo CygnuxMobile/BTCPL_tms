@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class Dropdown extends StatelessWidget {
   Dropdown(
@@ -15,11 +16,13 @@ class Dropdown extends StatelessWidget {
       required this.isSize,
       required this.enabled,
       this.image,
+      this.icon,
       this.height,
       this.boxDecoration});
 
   final RxString text;
   final RxString? image;
+  final Widget? icon;
   final RxString? selectedItem;
   final void Function(String?)? onChanged;
   final FormFieldValidator<String>? validator;
@@ -49,12 +52,19 @@ class Dropdown extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12),
             child: Row(
               children: [
-                Image(
-                  image: AssetImage(image == null
-                      ? 'assets/images/dashboardimages/In Transit.png'
-                      : image!.value),
-                  height: height == null ? 0 : height!.value,
-                ),
+                if (icon != null)
+                  icon!
+                else if (image != null)
+                  Image(
+                    image: AssetImage(image!.value),
+                    height: height == null ? 0 : height!.value,
+                  )
+                else
+                  const HugeIcon(
+                    icon: HugeIcons.strokeRoundedDeliveryTruck01,
+                    color: Color(0xff232F34),
+                    size: 25,
+                  ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),

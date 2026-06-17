@@ -2,11 +2,12 @@ import 'package:btcpl/widgets/tms_button.dart';
 import 'package:btcpl/widgets/tms_normaltext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 submitAlertDialog({
   required BuildContext context,
   required String title,
-  required String image,
+  required List<List<dynamic>> icon,
   required void Function() onTap,
   void Function()? printerTap,
   bool isPrintShow = false,
@@ -42,9 +43,10 @@ submitAlertDialog({
             ),
             Padding(
               padding: const EdgeInsets.all(15),
-              child: Image(
-                image: AssetImage(image),
-                height: 90,
+              child: HugeIcon(
+                icon: icon,
+                color: const Color(0xff232F34),
+                size: 90,
               ),
             ),
             const SizedBox(
@@ -98,10 +100,10 @@ TmsAlertDialog({
             mainAxisSize: MainAxisSize.min,
             children: [
               isShowImage ?
-              Image(
-                image: AssetImage(
-                    "assets/images/dashboardimages/successdialog.png"),
-                height: 60,
+              const HugeIcon(
+                icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+                color: Color(0xff232F34),
+                size: 60,
               ) : SizedBox(),
               if (title.isNotEmpty) ...{
                 SizedBox(

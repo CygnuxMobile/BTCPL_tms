@@ -4,6 +4,7 @@ import 'package:btcpl/moduls/manifest_page/sub_widget/manifest_scan_dialog.dart'
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../app_routes.dart';
 import '../../utils/pref.dart';
 import '../../widgets/app_size.dart';
@@ -108,7 +109,11 @@ class _ManifestScreenState extends State<ManifestScreen> {
                           Obx(
                             () => Dropdown(
                                 height: 25.0.obs,
-                                image: "assets/images/dashboardimages/To.png".obs,
+                                icon: const HugeIcon(
+                                  icon: HugeIcons.strokeRoundedLocation01,
+                                  color: Color(0xff232F34),
+                                  size: 25,
+                                ),
                                 enabled: true.obs,
                                 isSize: false,
                                 text: Pref().getBaseLocation().isEmpty
@@ -161,7 +166,11 @@ class _ManifestScreenState extends State<ManifestScreen> {
                         Obx(
                           () => Dropdown(
                             height: 25.0.obs,
-                            image: "assets/images/dashboardimages/Form.png".obs,
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedNote01,
+                              color: Color(0xff232F34),
+                              size: 25,
+                            ),
                             enabled: true.obs,
                             isSize: false,
                             text: Pref().getNextLocation().isEmpty
@@ -219,7 +228,7 @@ class _ManifestScreenState extends State<ManifestScreen> {
                                                 color: Color(0xff646D72),
                                                 text:
                                                     "${mfCtrl.checkValidSerialNoDataList[index].docketDate}",
-                                                image: 'assets/images/dashboardimages/Calendar.png',
+                                                icon: HugeIcons.strokeRoundedCalendar03,
                                                 height: 25),
                                           ],
                                         ),
@@ -227,7 +236,7 @@ class _ManifestScreenState extends State<ManifestScreen> {
                                             color: Color(0xff646D72),
                                             text:
                                                 '${mfCtrl.countScan(index)}/${mfCtrl.checkValidSerialNoDataList[index].bcserials!.length}',
-                                            image: 'assets/images/dashboardimages/Product.png',
+                                            icon: HugeIcons.strokeRoundedPackage,
                                             height: 25),
                                       ],
                                     ),
@@ -281,12 +290,13 @@ class _ManifestScreenState extends State<ManifestScreen> {
   }
 
   TmsManifestView(
-      {required String text, required String image, required double height, required Color color}) {
+      {required String text, required List<List<dynamic>> icon, required double height, required Color color}) {
     return Row(
       children: [
-        Image(
-          image: AssetImage(image),
-          height: height,
+        HugeIcon(
+          icon: icon,
+          color: Color(0xff232F34),
+          size: height,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

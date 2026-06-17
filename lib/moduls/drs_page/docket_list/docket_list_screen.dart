@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../app_routes.dart';
 import '../../../model/drs_model/drs_update_details/drs_update_details_response.dart';
 import '../../../utils/tms_color.dart';
@@ -232,7 +233,7 @@ class _DRSUpdateViewState extends State<DRSUpdateView> {
                       TmsImageTextView(
                         text: widget.itemList[widget.index].commDelyDt,
                         color: Color(0xff082283),
-                        image: 'assets/images/dashboardimages/Calendar.png',
+                        icon: HugeIcons.strokeRoundedCalendar03,
                         height: 25,
                       ),
                       const Spacer(),
@@ -240,7 +241,7 @@ class _DRSUpdateViewState extends State<DRSUpdateView> {
                     TmsImageTextView(
                       text: "${widget.itemList[widget.index].pkgsArrived}",
                       color: Color(0xff082283),
-                      image: 'assets/images/dashboardimages/Product.png',
+                      icon: HugeIcons.strokeRoundedPackage,
                       height: 25,
                     ),
                   ],
@@ -254,11 +255,10 @@ class _DRSUpdateViewState extends State<DRSUpdateView> {
                       color: Color(0xffC4CACD),
                       fontSize: 16,
                     ),
-                    Image(
-                      image: AssetImage(
-                        "assets/images/dashboardimages/arrowBlack.png",
-                      ),
-                      height: 30,
+                    const HugeIcon(
+                      icon: HugeIcons.strokeRoundedArrowRight01,
+                      color: Color(0xffC4CACD),
+                      size: 30,
                     ),
                     TmsText(
                         text: widget.itemList[widget.index].destcd,

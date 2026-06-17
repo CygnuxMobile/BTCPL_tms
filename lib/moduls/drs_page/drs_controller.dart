@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:intl/intl.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../app_routes.dart';
 import '../../model/drs_model/drs_submit/drs_submit_request.dart';
 import '../../model/drs_model/drs_submit/drs_submit_response.dart';
@@ -360,7 +361,7 @@ class DRSController extends GetxController {
               updateDrsApi(context: context, drsId: tapDrsNo!);
             },
             onTapText: 'Done',
-            image: 'assets/images/dashboardimages/succes.png',
+            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
           );
         } else {
           TmsToast.msg(drsSubmitResponse.message);

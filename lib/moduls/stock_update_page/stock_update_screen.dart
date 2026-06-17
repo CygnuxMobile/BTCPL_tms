@@ -4,6 +4,7 @@ import 'package:btcpl/moduls/stock_update_page/stock_update_controller.dart';
 import 'package:btcpl/moduls/stock_update_page/stock_update_scanned_docket_number.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../app_routes.dart';
@@ -338,16 +339,17 @@ class _StockUpdateViewState extends State<StockUpdateView> {
                 TmsImageTextView(
                   color: Colors.black.withOpacity(0.7),
                   text: widget.docketBcSerialList.dockno,
-                  image: 'assets/images/dashboardimages/Docket.png',
+                  icon: HugeIcons.strokeRoundedFile01,
                   height: 25,
                 ),
                 const Spacer(),
                 Obx(
-                  () => Image(
-                    image: AssetImage(widget.docketBcSerialList.isScan.value
-                        ? "assets/images/dashboardimages/done.png"
-                        : "assets/images/dashboardimages/Ok.png"),
-                    height: 20,
+                  () => HugeIcon(
+                    icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+                    color: widget.docketBcSerialList.isScan.value
+                        ? Colors.green
+                        : Colors.grey,
+                    size: 20,
                   ),
                 ),
               ],

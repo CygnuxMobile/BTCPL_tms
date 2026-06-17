@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart';
 import '../../app_routes.dart';
@@ -20,11 +21,11 @@ import '../quick_docket_page/quick_docket_controller.dart';
 import '../trecking_page/tracking_controller.dart';
 import 'dash_board_controller.dart';
 
-enum DashBordMenuEnum { manifest, stockUpdate, stockUpdateList, drsList, drsUpdate, none }
+enum DashBordMenuEnum { manifest, stockUpdate, stockUpdateList, drsList, drsUpdate, drsGenerate, none }
 
 DashBordMenuEnum dashBordMenuEnum = DashBordMenuEnum.none;
 
-enum WebViewEnum { manifest, thc, stockUpdate, arrival, none }
+enum WebViewEnum { manifest, thc, stockUpdate, arrival, drsGenerate, none }
 
 WebViewEnum webViewEnum = WebViewEnum.none;
 
@@ -52,6 +53,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
       useDefaultLoading: false,
       overlayColor: Colors.black.withOpacity(0.3),
       child: Scaffold(
+        backgroundColor: const Color(0xFFFBF5F8),
         key: scaffoldKey,
         drawer: drawer(context),
         appBar: AppBar(
@@ -75,7 +77,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                   Obx(
                     () => Dropdown(
                       height: 25.0.obs,
-                      image: "assets/images/dashboardimages/To.png".obs,
+                      icon: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedLocation01,
+                        color: Color(0xff232F34),
+                        size: 25,
+                      ),
                       enabled: true.obs,
                       isSize: false,
                       boxDecoration: BoxDecoration(
@@ -93,7 +99,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                 else
                   Dropdown(
                     height: 25.0.obs,
-                    image: "assets/images/dashboardimages/To.png".obs,
+                    icon: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedLocation01,
+                      color: Color(0xff232F34),
+                      size: 25,
+                    ),
                     enabled: Pref().getMultiLocation().isEmpty ? false.obs : true.obs,
                     isSize: false,
                     boxDecoration: BoxDecoration(
@@ -122,24 +132,23 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         if (module == 'quickDocket')
                           DashBoardContainer(
                             text: 'Quick Docket',
-                            image: 'assets/images/dashboardimages/Delivery Boy.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedPackage,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               quickDocketController.billingTypeApi(context: context);
                             },
                           )
-                        // else if (module == 'gcn')
-                        //   DashBoardContainer(
-                        //     text: 'GCN',
-                        //     image: 'assets/images/dashboardimages/gcn.png',
-                        //     ontap: () {
-                        //       ctrl.docketNumber.clear();
-                        //       customBottomSheet(context);
-                        //     },
-                        //   )
                         else if (module == 'manifest')
                           DashBoardContainer(
                             text: 'Manifest',
-                            image: 'assets/images/dashboardimages/manifest.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedListView,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               dashBordMenuEnum = DashBordMenuEnum.manifest;
 
@@ -149,7 +158,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'manifestWithoutScening')
                           DashBoardContainer(
                             text: 'Manifest Without Scanning',
-                            image: 'assets/images/dashboardimages/manifest.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedDocumentCode,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               webViewEnum = WebViewEnum.manifest;
                               Get.toNamed(AppRoutes.webViewScreen);
@@ -158,7 +171,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'thcWithoutScening')
                           DashBoardContainer(
                             text: 'Thc',
-                            image: 'assets/images/dashboardimages/thc.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedDeliveryTruck01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               webViewEnum = WebViewEnum.thc;
                               Get.toNamed(AppRoutes.webViewScreen);
@@ -167,7 +184,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'arrivalWithoutScening')
                           DashBoardContainer(
                             text: 'Arrival Without Scanning',
-                            image: 'assets/images/dashboardimages/arrived.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedLocation01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               webViewEnum = WebViewEnum.arrival;
                               Get.toNamed(AppRoutes.webViewScreen);
@@ -176,7 +197,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'arrival')
                           DashBoardContainer(
                             text: 'Arrival',
-                            image: 'assets/images/dashboardimages/arrived.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedLocationCheck01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               customBottomSheetArrival(context);
                             },
@@ -184,7 +209,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'stockUpdate')
                           DashBoardContainer(
                             text: 'Stock Update',
-                            image: 'assets/images/dashboardimages/Stock Update.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedPackageProcess,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () async {
                               dashBordMenuEnum = DashBordMenuEnum.stockUpdate;
                               String? baseLocation = Pref().getBaseLocation();
@@ -198,7 +227,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'stockUpdateWithoutScening')
                           DashBoardContainer(
                             text: 'StockUpdate Without Scanning',
-                            image: 'assets/images/dashboardimages/Stock Update.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedPackageOpen,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               webViewEnum = WebViewEnum.stockUpdate;
                               Get.toNamed(AppRoutes.webViewScreen);
@@ -207,7 +240,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'drs')
                           DashBoardContainer(
                             text: 'DRS',
-                            image: 'assets/images/dashboardimages/Delivery Boy.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedDeliveryTruck01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               String? baseLocation = Pref().getBaseLocation();
                               if (baseLocation.isEmpty) {
@@ -222,7 +259,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'pod')
                           DashBoardContainer(
                             text: 'POD',
-                            image: 'assets/images/dashboardimages/POD.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedSignature,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               Get.toNamed(AppRoutes.podScreen);
                             },
@@ -230,7 +271,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'tracking')
                           DashBoardContainer(
                             text: 'Tracking',
-                            image: 'assets/images/dashboardimages/Tracking.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedSearch01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               trackingCustomBottomSheet(context);
                             },
@@ -238,7 +283,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'unloadingSheet')
                           DashBoardContainer(
                             text: 'Unloading \nSheet',
-                            image: 'assets/images/dashboardimages/unloading.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedTask01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
                               unlodingcustomBottomSheet(context);
                             },
@@ -246,7 +295,11 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         else if (module == 'attendance')
                           DashBoardContainer(
                             text: 'Attendance',
-                            image: 'assets/images/dashboardimages/imgpsh_fullsize_anim.png',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedUserCheck01,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () async {
                               bool serviceEnabled = await location.serviceEnabled();
                               if (!serviceEnabled) {
@@ -256,14 +309,19 @@ class _DashBordScreenState extends State<DashBordScreen> {
                               }
                             },
                           )
-                        else if (module == 'prq')
+                        else if (module == 'drsGenerate')
                           DashBoardContainer(
-                            text: 'PRQ',
-                            image: 'assets/images/dashboardimages/Delivery Boy.png',
+                            text: 'DRS Generate',
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedArrange,
+                              color: Color(0xff232F34),
+                              size: 40,
+                            ),
                             ontap: () {
-                              ctrl.setScheduler();
+                              dashBordMenuEnum = DashBordMenuEnum.drsGenerate;
+                              Get.toNamed(AppRoutes.drsGenerateScreen);
                             },
-                          ),
+                          )
                     ],
                   ),
                 ),

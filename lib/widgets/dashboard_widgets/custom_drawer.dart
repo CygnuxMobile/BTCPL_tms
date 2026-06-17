@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../app_routes.dart';
 import '../../environments .dart';
 import '../../moduls/arrival_page/arrival_controller.dart';
 import '../../moduls/drs_page/drs_controller.dart';
 import '../../moduls/home_page/dash_board_controller.dart';
+import '../../moduls/home_page/dash_board_screen.dart';
 import '../../moduls/login_page/login_controller.dart';
 import '../../moduls/stock_update_page/stock_update_controller.dart';
 import '../../moduls/trecking_page/tracking_screen.dart';
@@ -97,14 +99,22 @@ Drawer drawer(context) {
 
             // CustomListTile(
             //   name: 'GCN',
-            //   image: 'assets/images/dashboardimages/gcn.png',
+            //   icon: HugeIcons.strokeRoundedFile01,
             //   onTap: () {
             //     DocketDialog();
             //   },
             // ),
+            //  CustomListTile(
+            //   name: 'DRS Generate',
+            //   icon: HugeIcons.strokeRoundedArrange,
+            //   onTap: () {
+            //     dashBordMenuEnum = DashBordMenuEnum.drsGenerate;
+            //     Get.toNamed(AppRoutes.drsGenerateScreen);
+            //   },
+            // ),
             CustomListTile(
               name: 'Logout',
-              image: 'assets/images/dashboardimages/logout.png',
+              icon: HugeIcons.strokeRoundedLogout01,
               onTap: () {
                 ctrl.logoutDialog();
               },
@@ -122,11 +132,11 @@ Drawer drawer(context) {
 
 /// drawer custom list view
 class CustomListTile extends StatelessWidget {
-  const CustomListTile({Key? key, required this.name, required this.onTap, required this.image})
+  const CustomListTile({Key? key, required this.name, required this.onTap, required this.icon})
       : super(key: key);
 
   final String name;
-  final String image;
+  final List<List<dynamic>> icon;
   final void Function() onTap;
 
   @override
@@ -134,9 +144,10 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       title: Row(
         children: [
-          Image(
-            image: AssetImage(image),
-            height: AppSize.size(context).height * 0.04,
+          HugeIcon(
+            icon: icon,
+            color: const Color(0xff232F34),
+            size: 25,
           ),
           const SizedBox(
             width: 20,
