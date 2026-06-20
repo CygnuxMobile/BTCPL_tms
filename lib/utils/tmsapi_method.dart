@@ -7,8 +7,24 @@ import '../app_routes.dart';
 import '../widgets/tms_alert_dialog.dart';
 
 class WebService {
-  static Logger logger = Logger();
-  static final Dio _dio = Dio();
+  static Logger logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 75,
+      colors: true,
+      printEmojis: true,
+      printTime: false,
+    ),
+  );
+  static final Dio _dio = Dio()
+    ..interceptors.add(LogInterceptor(
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: false,
+      responseBody: true,
+      error: true,
+    ));
 
   static void initializeDio() {
     _dio.interceptors.add(InterceptorsWrapper(
@@ -32,7 +48,6 @@ class WebService {
 
   /// get api
   static Future<Response> tmsGetRequest(String url) async {
-    logger.i(url);
     Response response = await _dio.get(
       url,
       options: Options(
@@ -42,14 +57,11 @@ class WebService {
           },
           responseType: ResponseType.plain),
     );
-    logger.i(response);
     return response;
   }
 
   /// post api
   static Future<Response> tmsPostRequest({required String url, required String body}) async {
-    logger.i(url);
-    logger.i(body);
     Response response = await _dio.post(
       url,
       data: body,
@@ -62,14 +74,11 @@ class WebService {
           responseType: ResponseType.plain),
     );
 
-    logger.i(response);
     return response;
   }
 
   /// post token api
   static Future<Response> tmsPostTokenRequest({required String url, required String body}) async {
-    logger.i(url);
-    logger.i(body);
     Response response = await _dio.post(
       url,
       data: body,
@@ -82,7 +91,6 @@ class WebService {
           },
           responseType: ResponseType.plain),
     );
-    logger.i(response);
     return response;
   }
 

@@ -42,8 +42,8 @@ class AvailableDocketItem {
   String desT_CD;
   String curr_Loc;
   int pendPkgQty;
-  int arrPkgQty;
-  int pkgsno;
+  double arrPkgQty;
+  double pkgsno;
   String payBas;
   String paybaS_Str;
   String cdeldt;
@@ -109,8 +109,8 @@ class AvailableDocketItem {
     desT_CD: json["desT_CD"] ?? "",
     curr_Loc: json["curr_Loc"] ?? "",
     pendPkgQty: json["pendPkgQty"] ?? 0,
-    arrPkgQty: json["arrPkgQty"] ?? 0,
-    pkgsno: json["pkgsno"] ?? 0,
+    arrPkgQty: (json["arrPkgQty"] ?? 0).toDouble(),
+    pkgsno: (json["pkgsno"] ?? 0).toDouble(),
     payBas: json["payBas"] ?? "",
     paybaS_Str: json["paybaS_Str"] ?? "",
     cdeldt: json["cdeldt"] ?? "",

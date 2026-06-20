@@ -120,8 +120,8 @@ class DrsGenerateItem {
   String dockno;
   String docksf;
   String orgncd;
-  int pkgsno;
-  int arrPkgQty;
+  double pkgsno;
+  double arrPkgQty;
   int pendPkgQty;
   String payBas;
   double actuwt;

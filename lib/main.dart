@@ -1,6 +1,7 @@
 import 'package:btcpl/utils/connection_handler.dart';
 import 'package:btcpl/utils/podDb/poddb_handler.dart';
 import 'package:btcpl/utils/pref.dart';
+import 'package:btcpl/utils/tmsapi_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -14,9 +15,9 @@ late PodDb podDb;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Pref().init();
+  WebService.initializeDio();
 
   /// this line can change app build flavor
   podDb = await PodDb.create();

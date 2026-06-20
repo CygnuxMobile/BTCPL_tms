@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TmsButton extends StatelessWidget {
+  final String text;
+  final Color color;
+  final Color? textColor;
+  final VoidCallback? onPressed;
+  final Size? size;
+  final double? textSize;
+  final double borderWidth;
+  final Color borderColor;
+  final double borderRadius;
+  final bool isLoading;
+
   const TmsButton({
     Key? key,
     required this.text,
@@ -11,16 +22,9 @@ class TmsButton extends StatelessWidget {
     this.textSize,
     this.borderWidth = 0,
     this.borderColor = Colors.transparent,
+    this.borderRadius = 8,
+    this.isLoading = false,
   }) : super(key: key);
-
-  final String text;
-  final Color color;
-  final Color? textColor;
-  final VoidCallback onPressed;
-  final Size? size;
-  final double? textSize;
-  final double borderWidth;
-  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +35,27 @@ class TmsButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           side: BorderSide(width: borderWidth, color: borderColor),
           borderRadius: BorderRadius.all(
-            Radius.circular(8),
+            Radius.circular(borderRadius),
           ),
         ),
       ),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: textSize ?? 15,
-          color: textColor ?? Colors.white,
-        ),
-      ),
+      onPressed: isLoading ? null : onPressed,
+      child: isLoading
+          ? const SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 2,
+              ),
+            )
+          : Text(
+              text,
+              style: TextStyle(
+                fontSize: textSize ?? 15,
+                color: textColor ?? Colors.white,
+              ),
+            ),
     );
   }
 }

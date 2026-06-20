@@ -16,6 +16,7 @@ import '../../../utils/pref.dart';
 import '../../../utils/tmsapi_method.dart';
 import '../../../utils/tmsapp_api.dart';
 import '../../../widgets/tost.dart';
+import '../../../widgets/submit_alert_dialog.dart';
 
 class DRSGenerateController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -26,6 +27,9 @@ class DRSGenerateController extends GetxController {
   final mobileNoController = TextEditingController();
   final driverNameController = TextEditingController();
   final loadingSupervisorController = TextEditingController();
+  final manualVendorNameController = TextEditingController();
+  final manualVehicleNoController = TextEditingController();
+  final cnoteNoController = TextEditingController();
 
   // Observable Data Lists
   var vendorTypeList = <VendorTypeItem>[].obs;
@@ -182,7 +186,7 @@ class DRSGenerateController extends GetxController {
         "username": Pref().getUserId(),
         "documentType": "2"
       });
-      print("Fetching Crossing Agents with body: $body");
+      WebService.logger.i("Fetching Crossing Agents with body: $body");
       
       var response = await WebService.tmsPostRequest(
         url: ApiService.getCrossingAgent,
@@ -190,74 +194,108 @@ class DRSGenerateController extends GetxController {
       );
       
       if (response.statusCode == 200) {
+        WebService.logger.d("Crossing Agents Response: ${response.data}");
         var res = crossingAgentResponseFromJson(response.data);
-        print("Crossing Agents Response Status: ${res.status}");
         
         if (res.status == 200) {
           crossingAgentList.value = res.data.venderscodes;
-          print("Crossing Agents loaded: ${crossingAgentList.length}");
+          WebService.logger.i("Crossing Agents loaded: ${crossingAgentList.length}");
         } else {
           crossingAgentList.clear();
-          print("No Crossing Agents found: ${res.message}");
+          WebService.logger.w("No Crossing Agents found: ${res.message}");
         }
       }
     } catch (e) {
-      print("Error fetching crossing agents: $e");
+      WebService.logger.e("Error fetching crossing agents", error: e);
       TmsToast.msg("Error fetching crossing agents: $e");
     }
   }
 
   Future<void> fetchAvailableDockets() async {
     try {
+      var body = jsonEncode({
+        "fromdt": DateFormat('d MMM yyyy').format(DateTime.now().subtract(const Duration(days: 30))),
+        "todt": DateFormat('d MMM yyyy').format(DateTime.now()),
+        "dttyp": "1",
+        "paybas": "All",
+        "trn": "All",
+        "bustyp": "All",
+        "status": "All",
+        "doctyp": "DRS",
+        "baseLocationCode": Pref().getBaseLocation(),
+        "docketList": "",
+        "alloted_To": "",
+        "loadingBy": "",
+        "chrgType": "",
+        "baseCompanyCode": Pref().getCompanyCode()
+      });
+      WebService.logger.i("Fetching Available Dockets with body: $body");
+
       var response = await WebService.tmsPostRequest(
         url: ApiService.avalabledocketinPRSDRS,
-        body: jsonEncode({
-          "fromdt": DateFormat('d MMM yyyy').format(DateTime.now().subtract(const Duration(days: 30))),
-          "todt": DateFormat('d MMM yyyy').format(DateTime.now()),
-          "dttyp": "1",
-          "paybas": "All",
-          "trn": "All",
-          "bustyp": "All",
-          "status": "All",
-          "doctyp": "DRS",
-          "baseLocationCode": Pref().getBaseLocation(),
-          "docketList": "",
-          "alloted_To": "",
-          "loadingBy": "",
-          "chrgType": "",
-          "baseCompanyCode": Pref().getCompanyCode()
-        }),
+        body: body,
       );
       if (response.statusCode == 200) {
+        WebService.logger.d("Available Dockets Response: ${response.data}");
         var res = availableDocketResponseFromJson(response.data);
         availableDockets.assignAll(res.data);
       }
     } catch (e) {
+      WebService.logger.e("Error fetching available dockets", error: e);
       TmsToast.msg("Error fetching available dockets: $e");
     }
   }
 
+  var isLoadingSubmit = false.obs;
+
   Future<void> submitDRS() async {
+    if (!(formKey.currentState?.validate() ?? false)) {
+      return;
+    }
+
     if (selectedDockets.isEmpty) {
       TmsToast.msg("Please select at least one docket");
       return;
     }
 
+    var isMarket = selectedVendorType.value?.vendorType_Code == "XX";
+
+    if (!isMarket) {
+      if (selectedVendor.value == null) {
+        TmsToast.msg("Please select a vendor");
+        return;
+      }
+      if (selectedVehicle.value == null) {
+        TmsToast.msg("Please select a vehicle");
+        return;
+      }
+    } else {
+      if (manualVendorNameController.text.isEmpty) {
+        TmsToast.msg("Please enter vendor name");
+        return;
+      }
+      if (manualVehicleNoController.text.isEmpty) {
+        TmsToast.msg("Please enter vehicle number");
+        return;
+      }
+    }
+
+    isLoadingSubmit.value = true;
     try {
       var request = PrepareDRSRequest(
         drsNo: manualDrsNoController.text,
         drscDate: DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(DateTime.now()),
-        vendorcode: selectedVendor.value?.vendor_Code ?? "",
-        vendorname: selectedVendor.value?.vendor_Name ?? "",
-        vehicleNo: selectedVehicle.value?.vehno ?? "",
+        vendorcode: isMarket ? "8888" : (selectedVendor.value?.vendor_Code ?? ""),
+        vendorname: isMarket ? manualVendorNameController.text : (selectedVendor.value?.vendor_Name ?? ""),
+        vehicleNo: isMarket ? manualVehicleNoController.text : (selectedVehicle.value?.vehno ?? ""),
         vendor_type: selectedVendorType.value?.vendorType_Code ?? "",
         tripsheetno: "",
         baseUserName: Pref().getUserId(),
         baseLocationCode: Pref().getBaseLocation(),
         baseCompanyCode: Pref().getCompanyCode(),
-        baseFinYear: "2024-2025",
+        baseFinYear:  Pref().getFinYear(),
         doc_Type: "DRS",
-        ismktVeh: selectedVendorType.value?.vendorType_Code == "XX" ? "Y" : "N",
+        ismktVeh: isMarket ? "Y" : "N",
         deliveryAgent: selectedDeliveryAgent.value?.userId ?? "",
         crossingAgent: selectedCrossingAgent.value?.vendorcode ?? "",
         rcBookNo: vehicleDetails.value?.rcBookNo ?? "",
@@ -300,17 +338,50 @@ class DRSGenerateController extends GetxController {
         )).toList(),
       );
 
+      String requestJson = prepareDRSRequestToJson(request);
+      WebService.logger.i("Submitting DRS with body: $requestJson");
+
       var response = await WebService.tmsPostRequest(
         url: ApiService.prepareDRS,
-        body: prepareDRSRequestToJson(request),
+        body: requestJson,
       );
 
       if (response.statusCode == 200) {
-        TmsToast.msg("DRS Prepared Successfully");
-        Get.back();
+        WebService.logger.d("Submit DRS Response: ${response.data}");
+        var resData = jsonDecode(response.data);
+        if (resData['status'] == 200 || resData['statusCode'] == 200) {
+          String drsNo = resData['data'] ?? "";
+          TmsAlertDialog(
+            context: Get.context!,
+            title: "DRS Prepared Successfully",
+            description: "DRS No: $drsNo",
+            onTapText: "OK",
+            buttonSize: const Size(100, 40),
+            isShowImage: true,
+            onPressed: () {
+              Get.back(); // close dialog
+              Get.back(); // go back to previous screen
+            },
+          );
+        } else {
+          String errorMsg = "Failed to prepare DRS";
+          if (resData['errors'] != null && resData['errors']['message'] != null) {
+            errorMsg = resData['errors']['message'];
+          } else if (resData['message'] != null) {
+            errorMsg = resData['message'];
+          }
+          WebService.logger.e("Prepare DRS Error: $errorMsg");
+          TmsToast.msg(errorMsg);
+        }
+      } else {
+        WebService.logger.e("Server Error: ${response.statusCode}");
+        TmsToast.msg("Server Error: ${response.statusCode}");
       }
     } catch (e) {
+      WebService.logger.e("Error preparing DRS", error: e);
       TmsToast.msg("Error preparing DRS: $e");
+    } finally {
+      isLoadingSubmit.value = false;
     }
   }
 
@@ -319,6 +390,66 @@ class DRSGenerateController extends GetxController {
       selectedDockets.remove(docket);
     } else {
       selectedDockets.add(docket);
+    }
+  }
+
+  var isLoadingAddCnote = false.obs;
+
+  Future<void> addCnoteManual() async {
+    String cnote = cnoteNoController.text.trim();
+    if (cnote.isEmpty) {
+      TmsToast.msg("Please enter Cnote No");
+      return;
+    }
+
+    isLoadingAddCnote.value = true;
+    try {
+      var body = jsonEncode({
+        "fromdt": "1 Jan 1990",
+        "todt": DateFormat('d MMM yyyy').format(DateTime.now()),
+        "dttyp": "1",
+        "paybas": "All",
+        "trn": "All",
+        "bustyp": "All",
+        "status": "All",
+        "doctyp": "DRS",
+        "baseLocationCode": Pref().getBaseLocation(),
+        "docketList": cnote,
+        "alloted_To": "",
+        "loadingBy": "",
+        "chrgType": "",
+        "baseCompanyCode": Pref().getCompanyCode()
+      });
+      WebService.logger.i("Adding Cnote Manual with body: $body");
+
+      var response = await WebService.tmsPostRequest(
+        url: ApiService.avalabledocketinPRSDRS,
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        WebService.logger.d("Add Cnote Response: ${response.data}");
+        var res = availableDocketResponseFromJson(response.data);
+        if (res.data.isNotEmpty) {
+          var docket = res.data.first;
+          if (!selectedDockets.any((element) => element.dockno == docket.dockno)) {
+            selectedDockets.add(docket);
+            cnoteNoController.clear();
+            TmsToast.msg("Cnote added successfully");
+          } else {
+            TmsToast.msg("Cnote already added");
+          }
+        } else {
+          TmsToast.msg("Cnote not found or not available");
+        }
+      } else {
+        WebService.logger.e("Server Error while adding Cnote: ${response.statusCode}");
+        TmsToast.msg("Server Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      WebService.logger.e("Error adding Cnote", error: e);
+      TmsToast.msg("Error adding Cnote: $e");
+    } finally {
+      isLoadingAddCnote.value = false;
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'package:btcpl/moduls/drs_generate/drs_generate_binding.dart';
+import 'package:btcpl/moduls/drs_generate/drs_generate_screen.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
 import 'moduls/arrival_page/arrival_binding.dart';
@@ -9,8 +11,6 @@ import 'moduls/docket_page/docket_package_list.dart';
 import 'moduls/docket_page/docket_screen.dart';
 import 'moduls/drs_page/docket_list/docket_list_screen.dart';
 import 'moduls/drs_page/drs_binding.dart';
-import 'moduls/drs_page/drs_generate/drs_generate_binding.dart';
-import 'moduls/drs_page/drs_generate/drs_generate_screen.dart';
 import 'moduls/drs_page/drs_list_screen.dart';
 import 'moduls/drs_page/drs_update/drs_update_screen.dart';
 import 'moduls/home_page/dash_board_binding.dart';
